@@ -1,0 +1,353 @@
+{
+  "info": {
+    "_postman_id": "6adcfb8e-ae12-48dd-9e72-66b34223e5f8",
+    "name": "QA Auto — REST API Testing",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "59194582"
+  
+  },
+  "item": [
+    {
+      "name": "01 - Create User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var jsonData = pm.response.json();\r\n\r\npm.test(\"Status code is 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\n\r\npm.test(\"Response status is ok\", function () {\r\n    pm.expect(jsonData.status).to.eql(\"ok\");\r\n});\r\npm.collectionVariables.set(\"user_id\", jsonData.data.userId);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Test\",\r\n    \"lastName\": \"User\",\r\n    \"email\": \"{{$randomExampleEmail}}\",\r\n    \"password\": \"Qwerty12345\",\r\n    \"repeatPassword\": \"Qwerty12345\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://qauto.forstudy.space/api/auth/signup",
+          "protocol": "https",
+          "host": [
+            "qauto",
+            "forstudy",
+            "space"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "signup"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "02 - Update User Profile",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var jsonData = pm.response.json();\r\n\r\npm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Name and lastName are updated\", function () {\r\n    pm.expect(jsonData.data.name).to.eql(\"Anna\");\r\n    pm.expect(jsonData.data.lastName).to.eql(\"Smith\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Anna\",\r\n    \"lastName\": \"Smith\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://qauto.forstudy.space/api/users/profile",
+          "protocol": "https",
+          "host": [
+            "qauto",
+            "forstudy",
+            "space"
+          ],
+          "path": [
+            "api",
+            "users",
+            "profile"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "03 - Update Distance Units",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var jsonData = pm.response.json();\r\n\r\npm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Distance units are miles\", function () {\r\n    pm.expect(jsonData.data.distanceUnits).to.eql(\"ml\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"currency\": \"usd\",\r\n    \"distanceUnits\": \"ml\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://qauto.forstudy.space/api/users/settings",
+          "protocol": "https",
+          "host": [
+            "qauto",
+            "forstudy",
+            "space"
+          ],
+          "path": [
+            "api",
+            "users",
+            "settings"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "04 - Create Car",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var jsonData = pm.response.json();\r\n\r\npm.test(\"Status code is 201\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\n\r\npm.test(\"Car created successfully\", function () {\r\n    pm.expect(jsonData.status).to.eql(\"ok\");\r\n    pm.expect(jsonData.data.carBrandId).to.eql(1);\r\n    pm.expect(jsonData.data.carModelId).to.eql(1);\r\n});\r\n\r\npm.collectionVariables.set(\"car_id\", jsonData.data.id);\r\npm.collectionVariables.set(\"update_date\", jsonData.data.updatedMileageAt);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"carBrandId\": 1,\r\n    \"carModelId\": 1,\r\n    \"mileage\": 122\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://qauto.forstudy.space/api/cars",
+          "protocol": "https",
+          "host": [
+            "qauto",
+            "forstudy",
+            "space"
+          ],
+          "path": [
+            "api",
+            "cars"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "05 - Update Car Mileage",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var jsonData = pm.response.json();\r\n\r\npm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Car mileage is updated\", function () {\r\n    pm.expect(jsonData.data.mileage).to.eql(500);\r\n    pm.expect(jsonData.data.id).to.eql(\r\n        Number(pm.collectionVariables.get(\"car_id\"))\r\n    );\r\n});\r\n\r\npm.collectionVariables.set(\"update_date\", jsonData.data.updatedMileageAt);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"carBrandId\": 1,\r\n    \"carModelId\": 1,\r\n    \"mileage\": 500\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://qauto.forstudy.space/api/cars/{{car_id}}",
+          "protocol": "https",
+          "host": [
+            "qauto",
+            "forstudy",
+            "space"
+          ],
+          "path": [
+            "api",
+            "cars",
+            "{{car_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "06 - Add Fuel Expense",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var jsonData = pm.response.json();\r\n\r\npm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Fuel expense is added\", function () {\r\n    pm.expect(jsonData.status).to.eql(\"ok\");\r\n    pm.expect(jsonData.data.carId).to.eql(\r\n        Number(pm.collectionVariables.get(\"car_id\"))\r\n    );\r\n    pm.expect(jsonData.data.liters).to.eql(20);\r\n    pm.expect(jsonData.data.totalCost).to.eql(40);\r\n});"
+            ]
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var today = new Date().toISOString().split(\"T\")[0];\r\n\r\npm.collectionVariables.set(\"today\", today);"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"carId\": {{car_id}},\r\n    \"reportedAt\": \"{{today}}\",\r\n    \"mileage\": 502,\r\n    \"liters\": 20,\r\n    \"totalCost\": 40,\r\n    \"forceMileage\": false\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://qauto.forstudy.space/api/expenses",
+          "protocol": "https",
+          "host": [
+            "qauto",
+            "forstudy",
+            "space"
+          ],
+          "path": [
+            "api",
+            "expenses"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "07 - Delete Car",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var jsonData = pm.response.json();\r\n\r\npm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Car deleted successfully\", function () {\r\n    pm.expect(jsonData.status).to.eql(\"ok\");\r\n    pm.expect(jsonData.data.carId).to.eql(\r\n        Number(pm.collectionVariables.get(\"car_id\"))\r\n    );\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "https://qauto.forstudy.space/api/cars/{{car_id}}",
+          "protocol": "https",
+          "host": [
+            "qauto",
+            "forstudy",
+            "space"
+          ],
+          "path": [
+            "api",
+            "cars",
+            "{{car_id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "08 - Delete User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "var jsonData = pm.response.json();\r\n\r\npm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"User deleted successfully\", function () {\r\n    pm.expect(jsonData.status).to.eql(\"ok\");\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "https://qauto.forstudy.space/api/users",
+          "protocol": "https",
+          "host": [
+            "qauto",
+            "forstudy",
+            "space"
+          ],
+          "path": [
+            "api",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "user_id",
+      "value": ""
+    },
+    {
+      "key": "car_id",
+      "value": ""
+    },
+    {
+      "key": "update_date",
+      "value": ""
+    },
+    {
+      "key": "today",
+      "value": ""
+    }
+  ]
+}
