@@ -43,6 +43,24 @@ This project contains a Postman collection with 8 API requests covering:
 
 [View Postman Collection](QA%20Auto%20%E2%80%94%20REST%20API%20Testing.postman_collection.json)
 
+## Project 2: SQL Database Queries
+
+**Database:** MySQL (educational project)
+
+**Tools:** MySQL Workbench, SQL
+
+Practiced SQL queries using a relational database with four tables: `users`, `cars`, `car_brands`, and `car_models`.
+
+**Skills demonstrated:**
+- Retrieving data with SELECT
+- Joining related tables with JOIN
+- Filtering records using WHERE
+- Sorting results using ORDER BY
+- Working with primary and foreign keys
+
+**SQL File:** [View SQL Queries](car_database_queries.sql)
+
+
 ## Upcoming Portfolio Projects
 
 - Test cases and checklists
