@@ -41,7 +41,7 @@ This project contains a Postman collection with 8 API requests covering:
 
 ### Collection File
 
-`QA Auto — REST API Testing.postman_collection.json`
+[View Postman Collection](QA%20Auto%20%E2%80%94%20REST%20API%20Testing.postman_collection.json)
 
 ## Upcoming Portfolio Projects
 
